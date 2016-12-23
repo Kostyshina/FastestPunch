@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FCB002</color>
+    <color name="colorPrimaryDark">#FCB002</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="buttonColor">#FFD65A</color>
+    <color name="punchButtonMainColor">#B20000</color>
+    <color name="punchButtonPeripheralColor">#FF7F7F</color>
+    <color name="punchButtonStrokeColor">#990000</color>
+    <color name="punchButtonTextColor">#FFFFFF</color>
+
+    <color name="parametersColor">#CCCCCC</color>
+</resources>

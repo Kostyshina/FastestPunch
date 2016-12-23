@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Fastest Punch</string>
+    <string name="punch_button">Punch</string>
+    <string name="community">Community</string>
+    <string name="history">History</string>
+    <string name="settings_description">Settings</string>
+</resources>
