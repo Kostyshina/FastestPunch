@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FCB002</color>
+    <color name="colorPrimary">#fcb002</color>
     <color name="colorPrimaryDark">#FCB002</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimaryLight">#FFD65A</color>
+    <color name="colorAccent">@color/colorGrey</color>
+    <color name="colorDefaultBackground">#ffffff</color>
+    <color name="colorRedDark">#990000</color>
+    <color name="colorRed">#B20000</color>
+    <color name="colorRedLight">#FF7F7F</color>
+    <color name="colorGrey">#cccccc</color>
+    <color name="colorTextWhite">#FFFFFF</color>
+    <color name="colorTextBlack">#000000</color>
 
-    <color name="buttonColor">#FFD65A</color>
-    <color name="punchButtonMainColor">#B20000</color>
-    <color name="punchButtonPeripheralColor">#FF7F7F</color>
-    <color name="punchButtonStrokeColor">#990000</color>
-    <color name="punchButtonTextColor">#FFFFFF</color>
+    <color name="md__defaultBackground">@color/colorDefaultBackground</color>
 
-    <color name="parametersColor">#CCCCCC</color>
 </resources>

@@ -6,6 +6,40 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:colorBackground">@color/colorDefaultBackground</item>
+        <!--<item name="android:windowActionBarOverlay">false</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>-->
+    </style>
+
+    <style name="MainSettingsTheme" parent="AppTheme">
+        <!--<item name="android:windowIsFloating">false</item>-->
+        <item name="android:textColor">@color/colorTextWhite</item>
+        <item name="android:textSize">@dimen/main_settings_text_size</item>
+    </style>
+
+    <style name="LicenseTheme" parent="AppTheme">
+        <item name="actionBarStyle">@style/NoTitleActionBarStyle</item>
+        <!--<item name="windowNoTitle">true</item>
+        <item name="windowActionBar">true</item>-->
+    </style>
+
+    <style name="NoTitleActionBarStyle" parent="Widget.AppCompat.ActionBar">
+        <item name="displayOptions">useLogo</item>
+        <!--<item name="titleTextStyle">@style/NoTextStyle</item>-->
+        <item name="background">@color/colorPrimary</item>
+    </style>
+
+    <style name="NoTextStyle">
+        <item name="android:textSize">0sp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+    
+    <style name="RedButtonTheme" parent="@android:style/Widget.Button">
+        <item name="android:color">@color/colorRedDark</item>
+        <item name="android:textColor">@color/colorTextWhite</item>
+        <item name="android:typeface">normal</item>
+        <item name="android:textSize">@dimen/button_text_size</item>
     </style>
 
 </resources>

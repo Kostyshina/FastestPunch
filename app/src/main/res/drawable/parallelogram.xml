@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Colored rectangle-->
+    <item
+        android:right="100dp"
+        android:left="0dp"
+        android:top="0dp"
+        android:bottom="50dp">
+        <shape android:shape="rectangle">
+            <size android:height="25dp" android:width="100dp"/>
+            <solid android:color="@color/colorPrimaryLight" />
+        </shape>
+    </item>
+
+    <!-- This rectangle for the left side -->
+    <!-- Its color should be the same as layout's background -->
+    <item
+        android:right="200dp"
+        android:left="-50dp"
+        android:top="-45dp"
+        android:bottom="0dp">
+        <rotate
+            android:fromDegrees="45">
+            <shape android:shape="rectangle">
+                <solid android:color="@color/colorDefaultBackground" />
+            </shape>
+        </rotate>
+    </item>
+
+   <!-- <item
+        android:right="0dp"
+        android:left="20dp"
+        android:top="0dp"
+        android:bottom="10dp">
+        <shape android:shape="rectangle">
+            <size android:height="5dp" android:width="20dp"/>
+            <solid android:color="@color/colorGrey" />
+        </shape>
+    </item>
+    &lt;!&ndash; This rectangle for the right side &ndash;&gt;
+    &lt;!&ndash; Their color should be the same as layout's background &ndash;&gt;
+    <item
+        android:right="-20dp"
+        android:left="40dp"
+        android:top="-5dp"
+        android:bottom="-5dp">
+        <rotate
+            android:fromDegrees="135">
+            <shape android:shape="rectangle">
+                <solid android:color="@color/colorDefaultBackground" />
+            </shape>
+        </rotate>
+    </item>
+-->
+    <item
+        android:top="0dp"
+        android:bottom="50dp">
+        <rotate
+            android:fromDegrees="135">
+            <shape android:shape="rectangle">
+                <size android:width="25dp" android:height="25dp"/>
+                <solid android:color="@color/colorDefaultBackground" />
+            </shape>
+        </rotate>
+    </item>
+
+</layer-list>

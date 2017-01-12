@@ -8,5 +8,20 @@
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
 
+    <!--Main settings activity-->
+    <string name="gloves_weight_text">Gloves weight</string>
+    <string name="gloves_weight_unit">oz</string>
+    <string name="punch_type_text">Punch type</string>
+
+    <!--Licence activity-->
+    <string name="copyright">\u00A9</string>
+    <string name="eula_title">License agreement</string>
+    <string name="eula_text">There must be text of EULA.
+        \nThere must be text of EULA.
+        \n\nThere must be text of EULA.
+    </string>
+    <string name="eula_line_description">Line</string>
+    <string name="accept_button_text">Accept</string>
+
     <string name="pref_previously_started">true</string>
 </resources>
