@@ -1,15 +1,20 @@
 package by.stylesoft.fastestpunch;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import android.widget.AdapterView;
@@ -34,23 +39,31 @@ public class MainActivity extends AppCompatActivity {
     private MenuDrawer mDrawer;
     private ArrayAdapter mAdapter;
     private CharSequence mTitle;
-    private class MainSettingsActivity{
-        private ImageButton mTopButton;
 
-        public MainSettingsActivity(){
-
-
-        }
-        public void closeMenuDrawer(){
-            mDrawer.closeMenu();
-        }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.copyright_menu, menu);
+        return true;
     }
+    public void onComposeAction(MenuItem mi) {
+        // handle click here
+        startActivity(LicenseActivity.class);
 
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);//содержимое Activity из layout-файла
+
+        /*ActionBar actionBar = getSupportActionBar();
+        LayoutInflater layoutInflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View copyrightView = layoutInflater.inflate(R.layout.copyright_view, null);
+        TextView title = (TextView)copyrightView.findViewById(R.id.actionBarTitleView);
+        title.setText(getResources().getString(R.string.app_name));
+
+        actionBar.setCustomView(copyrightView);*/
 
         RelativeLayout bottomSheetLayout = (RelativeLayout) findViewById(R.id.activity_main_settings);
 
@@ -149,13 +162,9 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         boolean previouslyStarted = prefs.getBoolean(getString(R.string.pref_previously_started), false);
         if(!previouslyStarted) {
-            SharedPreferences.Editor edit = prefs.edit();
-            edit.putBoolean(getString(R.string.pref_previously_started), Boolean.TRUE);
-            edit.commit();
             startActivity(LicenseActivity.class);
         }
         super.onStart();
-
     }
 
     /** Called when the activity has become visible. */

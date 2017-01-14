@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <item
+        android:id="@+id/overflowItem"
+        android:icon="@mipmap/ic_menu_moreoverflow_normal_holo_light"
+        app:showAsAction="ifRoom"
+        android:title="@string/overflow">
+        <menu>
+            <item
+                android:id="@+id/punchSpeedItem"
+                android:icon="@drawable/ic_arrow_down_black"
+                app:showAsAction="always"
+                android:title="@string/punch_button"/>
+            <item
+                android:id="@+id/reactionSpeedItem"
+                android:icon="@drawable/ic_arrow_down_black"
+                app:showAsAction="ifRoom"
+                android:title="@string/reactionSpeed"/>
+            <item
+                android:id="@+id/accelerationItem"
+                android:icon="@drawable/ic_arrow_down_black"
+                app:showAsAction="ifRoom"
+                android:title="@string/acceleration"/>
+            <item
+                android:id="@+id/dateItem"
+                android:icon="@drawable/ic_arrow_down"
+                app:showAsAction="ifRoom"
+                android:title="@string/date"/>
+        </menu>
+    </item>
+</menu>

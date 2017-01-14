@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <item
+        android:id="@+id/overflowItem"
+        android:icon="@mipmap/ic_menu_moreoverflow_normal_holo_light"
+        app:showAsAction="ifRoom"
+        android:title="@string/overflow">
+        <menu>
+            <item
+                android:id="@+id/averageValueItem"
+                app:showAsAction="always"
+                android:title="@string/averageValue"/>
+            <item
+                android:id="@+id/changeNameItem"
+                app:showAsAction="ifRoom"
+                android:title="@string/changeName"/>
+            <item
+                android:id="@+id/leaveCommunityItem"
+                app:showAsAction="ifRoom"
+                android:title="@string/leaveCommunity"/>
+        </menu>
+    </item>
+</menu>

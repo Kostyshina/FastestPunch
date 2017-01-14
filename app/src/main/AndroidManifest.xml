@@ -22,7 +22,12 @@
             android:theme="@style/MainSettingsTheme"/>
         <activity
             android:name=".LicenseActivity"
-            android:theme="@style/LicenseTheme"/>
+            android:theme="@style/LicenseTheme"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
     </application>
 
 </manifest>

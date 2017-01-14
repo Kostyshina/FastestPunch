@@ -1,12 +1,22 @@
 <resources>
+    <string name="pref_previously_started">true</string>
+
+    <string name="overflow">Overflow</string>
+    <string name="averageValue">Average value</string>
+    <string name="changeName">Change name</string>
+    <string name="leaveCommunity">Leave community</string>
+
+    <string name="punchSpeed">Punch speed</string>
+    <string name="reactionSpeed">Reaction speed</string>
+    <string name="acceleration">Accelerator</string>
+    <string name="date">Date</string>
+    <!--Main activity-->
     <string name="app_name">Fastest Punch</string>
     <string name="punch_button">Punch</string>
     <string name="community">Community</string>
     <string name="history">History</string>
     <string name="settings_description">Settings</string>
-
-    <string name="drawer_open">Open navigation drawer</string>
-    <string name="drawer_close">Close navigation drawer</string>
+    <string name="copyright">Copyright</string>
 
     <!--Main settings activity-->
     <string name="gloves_weight_text">Gloves weight</string>
@@ -14,7 +24,6 @@
     <string name="punch_type_text">Punch type</string>
 
     <!--Licence activity-->
-    <string name="copyright">\u00A9</string>
     <string name="eula_title">License agreement</string>
     <string name="eula_text">There must be text of EULA.
         \nThere must be text of EULA.
@@ -22,6 +31,11 @@
     </string>
     <string name="eula_line_description">Line</string>
     <string name="accept_button_text">Accept</string>
+    <!--<string name="accept_button_pushed">false</string>-->
 
-    <string name="pref_previously_started">true</string>
+    <!--History-->
+    <string name="history_label">History</string>
+
+    <!--Community-->
+    <string name="community_label">Community</string>
 </resources>
