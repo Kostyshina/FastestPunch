@@ -22,8 +22,8 @@
         android:layout_alignParentTop="true"
         android:contentDescription="@string/settings_description"
         android:background="@color/colorDefaultBackground"
-        android:src="@drawable/ic_menu_arrow_bottom" />
-
+        android:src="@drawable/ic_menu_arrow_bottom"
+        />
     <TableLayout
         android:id="@+id/imageTable"
         android:layout_below="@id/menuTopButton"
@@ -35,65 +35,114 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/image_item_whole_left_hand"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:padding="5dp"
-                android:scaleType="fitCenter"
-                android:src="@mipmap/whole_left_hand"/>
+            <ToggleButton
+                android:id="@+id/leftHandButton"
+                android:layout_width="@dimen/main_settings_item_size"
+                android:layout_height="@dimen/main_settings_item_size"
+                android:drawableTop="@mipmap/whole_left_hand"
+                android:text="@string/left_hand_item"
+                android:textOn="@string/left_hand_item"
+                android:textOff="@string/left_hand_item"
+                android:layout_marginEnd="@dimen/normal_margin"
+                style="@style/MainSettingsItemTheme" />
+            <!--android:background="@drawable/main_settings_item_check"-->
+            <ToggleButton
+                android:id="@+id/rightHandButton"
+                android:layout_width="@dimen/main_settings_item_size"
+                android:layout_height="@dimen/main_settings_item_size"
+                android:drawableTop="@mipmap/whole_right_hand"
 
-            <ImageView
-                android:id="@+id/image_item_whole_right_hand"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:padding="5dp"
-                android:scaleType="fitCenter"
-                android:src="@mipmap/whole_right_hand"/>
+                android:tint="@color/colorGrey"
+                android:text="@string/right_hand_item"
+                android:textOn="@string/right_hand_item"
+                android:textOff="@string/right_hand_item"
+                android:layout_marginBottom="@dimen/normal_margin"
+                style="@style/MainSettingsItemTheme" />
+            <!--android:background="@drawable/main_settings_item_uncheck"-->
         </TableRow>
 
         <TableRow
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/image_item_gloves_on"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:padding="5dp"
-                android:scaleType="fitCenter"
-                android:src="@mipmap/boxing"/>
+            <ToggleButton
+                android:id="@+id/glovesOnButton"
+                android:layout_width="@dimen/main_settings_item_size"
+                android:layout_height="@dimen/main_settings_item_size"
+                android:drawableTop="@mipmap/boxing"
 
-            <ImageView
-                android:id="@+id/image_item_gloves_off"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:padding="5dp"
-                android:scaleType="fitCenter"
-                android:src="@mipmap/whithout_gloves"/>
+                android:text="@string/gloves_on_item"
+                android:textOn="@string/gloves_on_item"
+                android:textOff="@string/gloves_on_item"
+                android:layout_marginEnd="@dimen/normal_margin"
+                style="@style/MainSettingsItemTheme" />
+            <!--android:background="@drawable/main_settings_item_uncheck"-->
+
+            <ToggleButton
+                android:id="@+id/glovesOffButton"
+                android:layout_width="@dimen/main_settings_item_size"
+                android:layout_height="@dimen/main_settings_item_size"
+                android:drawableTop="@mipmap/whithout_gloves"
+
+                android:text="@string/gloves_off_item"
+                android:textOn="@string/gloves_off_item"
+                android:textOff="@string/gloves_off_item"
+                android:layout_marginBottom="@dimen/normal_margin"
+                style="@style/MainSettingsItemTheme" />
+            <!--android:background="@drawable/main_settings_item_check"-->
         </TableRow>
 
         <TableRow
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/image_item_on_step"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:padding="5dp"
-                android:scaleType="fitCenter"
-                android:src="@mipmap/gloves_not_chosed"/>
+            <ToggleButton
+                android:id="@+id/punchOnStepButton"
+                android:layout_width="@dimen/main_settings_item_size"
+                android:layout_height="@dimen/main_settings_item_size"
+                android:drawableTop="@drawable/ic_punch_on_step"
 
-            <ImageView
-                android:id="@+id/image_item_on_spot"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:padding="5dp"
-                android:scaleType="fitCenter"
-                android:src="@mipmap/gloves_not_chosed"/>
+                android:text="@string/punch_on_step_item"
+                android:textOn="@string/punch_on_step_item"
+                android:textOff="@string/punch_on_step_item"
+                android:layout_marginEnd="@dimen/normal_margin"
+                style="@style/MainSettingsItemTheme" />
+            <!--android:background="@drawable/main_settings_item_check"-->
+
+            <ToggleButton
+                android:id="@+id/punchWithSpaceButton"
+                android:layout_width="@dimen/main_settings_item_size"
+                android:layout_height="@dimen/main_settings_item_size"
+                android:drawableTop="@drawable/ic_punch_with_space"
+
+                android:text="@string/punch_with_space_item"
+                android:textOn="@string/punch_with_space_item"
+                android:textOff="@string/punch_with_space_item"
+                android:layout_marginBottom="@dimen/normal_margin"
+                style="@style/MainSettingsItemTheme"/>
+            <!--android:background="@drawable/main_settings_item_uncheck"-->
         </TableRow>
     </TableLayout>
+
+    <LinearLayout
+        android:id="@+id/punchTypeLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageTable"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/punch_type_text" />
+        <!-- <Spinner
+             android:id="@+id/punchType"
+             android:layout_width="fill_parent"
+             android:layout_height="wrap_content"
+             android:inputType="number"/>-->
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/glovesWeightForm"
@@ -101,7 +150,8 @@
         android:layout_height="40dp"
         android:layout_below="@+id/imageTable"
         android:orientation="horizontal"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible">
         <!--android:visibility="invisible"-->
 
         <TextView
@@ -131,27 +181,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:text="@string/gloves_weight_unit" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/punchTypeLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/glovesWeightForm"
-        android:orientation="horizontal"
-        android:layout_centerHorizontal="true"
-        android:visibility="invisible">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/punch_type_text" />
-        <!-- <Spinner
-             android:id="@+id/punchType"
-             android:layout_width="fill_parent"
-             android:layout_height="wrap_content"
-             android:inputType="number"/>-->
-
     </LinearLayout>
 
 </RelativeLayout>

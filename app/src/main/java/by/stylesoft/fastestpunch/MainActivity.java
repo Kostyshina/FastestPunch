@@ -19,12 +19,17 @@ import android.view.View;
 
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import net.simonvt.menudrawer.MenuDrawer;
 import net.simonvt.menudrawer.Position;
@@ -88,6 +93,42 @@ public class MainActivity extends AppCompatActivity {
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
             }
         });
+
+        int i;
+        int j;
+        TableLayout imageTable = (TableLayout) findViewById(R.id.imageTable);
+        int countRow = imageTable.getChildCount();
+        for(i = 0; i < countRow; i++) {
+            View v = imageTable.getChildAt(i);
+            if (v instanceof TableRow) {
+                TableRow row = (TableRow) v;
+                int countCell = row.getChildCount();
+                for (j = 0; j < countCell; j++) {
+                    View v2 = row.getChildAt(j);
+                    if (v2 instanceof ToggleButton) {
+                        ToggleButton b = (ToggleButton) v2;
+                        b.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+                            @Override
+                            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                /*if(getResources().getDrawable(R.drawable.main_settings_item_inactive).getConstantState().equals(
+                                        v.getBackground().getConstantState())) {
+                                    v.setSelected(true);
+                                }else {
+                                    v.setSelected(false);
+                                }*/
+                                /*int states[] = b.getDrawableState();
+                                for(int state : states) {
+
+                                    if (state == android.R.attr.state_selected){
+
+                                    }
+                                }*/
+                            }
+                        });
+                    }
+                }
+            }
+        }
 
         //final MainSettingsActivity mSettingsActivity = new MainSettingsActivity();
         /*mDrawer = MenuDrawer.attach(this, MenuDrawer.Type.OVERLAY, Position.TOP);

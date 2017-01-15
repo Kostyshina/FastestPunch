@@ -19,6 +19,12 @@
     <string name="copyright">Copyright</string>
 
     <!--Main settings activity-->
+    <string name="left_hand_item">left</string>
+    <string name="right_hand_item">right</string>
+    <string name="gloves_on_item">gloves</string>
+    <string name="gloves_off_item">no gloves</string>
+    <string name="punch_on_step_item">on step</string>
+    <string name="punch_with_space_item">with space</string>
     <string name="gloves_weight_text">Gloves weight</string>
     <string name="gloves_weight_unit">oz</string>
     <string name="punch_type_text">Punch type</string>

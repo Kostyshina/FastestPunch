@@ -6,7 +6,7 @@
                 android:centerColor="@color/colorRed"
                 android:endColor="@color/colorRedLight"
                 android:angle="45" />
-            <stroke android:width="@dimen/punch_button_stroke_width" android:color="@color/colorRedDark" />
+            <stroke android:width="@dimen/stroke_width" android:color="@color/colorRedDark" />
         </shape>
     </item>
     <item android:state_pressed="true">
