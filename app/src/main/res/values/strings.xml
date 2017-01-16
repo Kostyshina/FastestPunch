@@ -28,6 +28,13 @@
     <string name="gloves_weight_text">Gloves weight</string>
     <string name="gloves_weight_unit">oz</string>
     <string name="punch_type_text">Punch type</string>
+    <string-array name="punch_type_array">
+        <item>jab</item>
+        <item>cross</item>
+        <item>hook</item>
+        <item>uppercut</item>
+        <item>overhand</item>
+    </string-array>
 
     <!--Licence activity-->
     <string name="eula_title">License agreement</string>
