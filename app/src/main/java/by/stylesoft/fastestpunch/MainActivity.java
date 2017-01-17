@@ -18,6 +18,11 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextWatcher;
+import android.text.style.ImageSpan;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -182,39 +187,6 @@ public class MainActivity extends AppCompatActivity {
         mTopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TableLayout imageTable = (TableLayout) contentViewParam.findViewById(R.id.imageTable);
-                int countRow = imageTable.getChildCount();
-                for (int i = 0; i < countRow; i++) {
-                    View view = imageTable.getChildAt(i);
-                    if (view instanceof RadioGroup) {
-                        RadioGroup group = (RadioGroup) view;
-                        for (int j = 0; j < group.getChildCount(); j++) {
-                            final ToggleButton toggleButton = (ToggleButton) group.getChildAt(j);
-                            if (toggleButton.isChecked()) {
-                                TextView textView = new TextView(getApplicationContext());
-                                switch (i) {
-                                    case 0:
-                                        textView = (TextView) findViewById(R.id.handView);
-                                        break;
-                                    case 1:
-                                        textView = (TextView) findViewById(R.id.glovesView);
-                                        if(contentViewParam.findViewById(R.id.glovesWeightForm).getVisibility() == View.VISIBLE) {
-                                            EditText editText = (EditText) contentViewParam.findViewById(R.id.glovesWeight);
-                                            textView.setText(editText.getText().toString());
-                                        }
-                                        break;
-                                    case 2:
-                                        textView = (TextView) findViewById(R.id.movesView);
-                                        break;
-                                    default:
-                                        Toast.makeText(getApplicationContext(), "No view found for " + i,
-                                                Toast.LENGTH_SHORT).show();
-                                }
-                                textView.setCompoundDrawables(null, toggleButton.getCompoundDrawables()[1], null, null);
-                            }
-                        }
-                    }
-                }
                 mBottomSheetDialog.dismiss();
                 //bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
             }
@@ -237,20 +209,21 @@ public class MainActivity extends AppCompatActivity {
     public void bottomSheetBehavior(){
         View contentView = contentViewParam;
         //ImageButton mTopButton = (ImageButton) contentView.findViewById(R.id.menuTopButton);
-        Spinner spinner = (Spinner) contentView.findViewById(R.id.punchTypeSpinner);
+        final Spinner spinner = (Spinner) contentView.findViewById(R.id.punchTypeSpinner);
         //Button[] buttons = new Button[3];
 
         mBottomSheetDialog.show();
         //contentViewParam = contentView;
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.punch_type_array,
+        /*ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.punch_type_array,
                 android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        spinner.setAdapter(adapter);*/
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                TextView textView = (TextView) findViewById(R.id.punchTypeView);
+                textView.setText(parent.getItemAtPosition(position).toString());
             }
 
             @Override
@@ -259,27 +232,72 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        int i;
-        TableLayout imageTable = (TableLayout) contentView.findViewById(R.id.imageTable);
+        EditText editText = (EditText) contentViewParam.findViewById(R.id.glovesWeight);
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (contentViewParam.findViewById(R.id.glovesWeightForm).getVisibility() == View.VISIBLE) {
+                    TextView textView = (TextView) findViewById(R.id.glovesView);
+                    textView.setText(s);
+                }
+            }
+        });
+
+
+        final TableLayout imageTable = (TableLayout) contentView.findViewById(R.id.imageTable);
         int countRow = imageTable.getChildCount();
-        for (i = 0; i < countRow; i++) {
+        for (int i = 0; i < countRow; i++) {
             View v = imageTable.getChildAt(i);
             if (v instanceof RadioGroup) {
                 RadioGroup group = (RadioGroup) v;
                 group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(RadioGroup group, int checkedId) {
+                        int index = imageTable.indexOfChild(group);
                         for (int j = 0; j < group.getChildCount(); j++) {
-                            final ToggleButton view = (ToggleButton) group.getChildAt(j);
-                            view.setChecked(view.getId() == checkedId);
-                            Drawable drawable = view.getCompoundDrawables()[1];
+                            final ToggleButton toggleButton = (ToggleButton) group.getChildAt(j);
+                            toggleButton.setChecked(toggleButton.getId() == checkedId);
+                            Drawable drawable = toggleButton.getCompoundDrawables()[1];
                             int color = getResources().getColor(R.color.colorGreyDark);
-                            if(view.getId() != checkedId){
+                            if(toggleButton.getId() != checkedId){
                                 drawable.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
                             } else {
                                 drawable.clearColorFilter();
+                                TextView textView = new TextView(getApplicationContext());
+                                switch (index) {
+                                    case 0:
+                                        textView = (TextView) findViewById(R.id.handView);
+                                        break;
+                                    case 1:
+                                        textView = (TextView) findViewById(R.id.glovesView);
+                                        break;
+                                    case 2:
+                                        textView = (TextView) findViewById(R.id.movesView);
+                                        break;
+                                    default:
+                                        Toast.makeText(getApplicationContext(), "No view found for " + index,
+                                                Toast.LENGTH_SHORT).show();
+                                }
+                                textView.setCompoundDrawables(null, toggleButton.getCompoundDrawables()[1], null, null);
                             }
-                            view.setCompoundDrawables(null, drawable, null, null);
+                            /*ImageSpan imageSpan = new ImageSpan(drawable);
+                            SpannableString content = new SpannableString(toggleButton.getText());
+                            content.setSpan(imageSpan,0,1, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+                            toggleButton.setCompoundDrawables(null,null,null,null);
+                            toggleButton.setText(content);
+                            toggleButton.setTextOff(content);
+                            toggleButton.setTextOn(content);*/
+                            toggleButton.setCompoundDrawables(null, drawable, null, null);
                         }
                     }
                 });

@@ -26,57 +26,76 @@
         <LinearLayout
             android:id="@+id/allSettings"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_marginTop="25dp"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/punchTypeView"
-                android:layout_width="wrap_content"
-                android:layout_height="55dp"
-                android:layout_marginEnd="4dp"
-                android:layout_weight="9"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/fourth_margin"
+                android:gravity="center"
+                android:layout_weight="3"
                 android:background="@drawable/parameters_background" />
             <LinearLayout
                 android:id="@+id/parametersLayout"
-                android:layout_width="50dp"
-                android:layout_height="55dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_marginStart="4dp"
                 android:layout_marginEnd="4dp"
-                android:layout_weight="12"
+                android:layout_weight="5"
                 android:orientation="horizontal"
-                android:background="@drawable/parameters_background">
+                android:background="@drawable/parameters_background"
+                android:gravity="center">
                 <TextView
                     android:id="@+id/handView"
-                    android:layout_width="50dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:drawableTop="@drawable/ic_right_hand_black"/>
+                    android:layout_marginStart="6dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginTop="@dimen/fourth_margin"
+                    android:scaleX="0.9"
+                    android:scaleY="0.9"
+                    android:drawableTop="@drawable/ic_right_hand_black" />
                 <TextView
                     android:id="@+id/glovesView"
-                    android:layout_width="50dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:textSize="12sp"
-                    android:textAlignment="center"
-                    android:drawableTop="@drawable/ic_gloves_off_black"/>
+                    android:layout_marginStart="3dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginTop="@dimen/fourth_margin"
+                    android:scaleX="0.8"
+                    android:scaleY="0.8"
+                    android:textSize="14sp"
+                    android:gravity="center|bottom"
+                    android:text=""
+                    android:textAlignment="gravity"
+                    android:drawableTop="@drawable/ic_gloves_off_black" />
                 <TextView
                     android:id="@+id/movesView"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:drawableTop="@drawable/ic_punch_with_space_black"/>
+                    android:layout_marginStart="3dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginTop="@dimen/fourth_margin"
+                    android:scaleX="0.9"
+                    android:scaleY="0.9"
+                    android:drawableTop="@drawable/ic_punch_with_space_black" />
             </LinearLayout>
 
             <ImageButton
                 android:id="@+id/mainSettingsButton"
-                android:layout_width="50dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginStart="4dp"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
+                android:layout_marginStart="@dimen/fourth_margin"
+                android:layout_weight="1.5"
                 android:background="@drawable/button_background"
                 android:contentDescription="@string/settings_description"
-                android:padding="5dp"
+                android:padding="4dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_settings_black_24dp" />
+            <!--android:adjustViewBounds="true"-->
 
         </LinearLayout>
 

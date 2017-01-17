@@ -44,9 +44,12 @@
     </style>
 
     <style name="MainSettingsItemTheme" parent="@android:style/Widget.Button.Toggle">
-        <item name="android:padding">5dp</item>
-        <item name="android:scaleType">fitCenter</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">3dp</item>
+        <!--<item name="android:scaleType">fitCenter</item>-->
         <item name="android:onClick">onToggle</item>
+        <item name="android:gravity">center_horizontal|bottom</item>
+        <item name="android:textAlignment">gravity</item>
         <!--        <item name="android:textOn">?android:attr/text</item>
         <item name="android:textOff">?android:attr/text</item>-->
         <item name="android:background">@drawable/main_settings_item</item>

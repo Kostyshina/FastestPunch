@@ -27,7 +27,7 @@
         android:id="@+id/imageTable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/menuTopButton"
+        android:layout_below="@+id/menuTopButton"
         android:layout_centerHorizontal="true">
 
             <RadioGroup
@@ -131,23 +131,25 @@
     <LinearLayout
         android:id="@+id/punchTypeLayout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_below="@+id/glovesWeightForm"
         android:layout_centerHorizontal="true"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/punch_type_text" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/punch_type_text"
+            android:textSize="16sp"/>
 
         <Spinner
             android:id="@+id/punchTypeSpinner"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:spinnerMode="dialog"
+            android:entries="@array/punch_type_array"
             style="@style/Base.Widget.AppCompat.Spinner.Underlined"/>
-
     </LinearLayout>
 
     <LinearLayout
