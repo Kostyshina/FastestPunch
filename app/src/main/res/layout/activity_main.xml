@@ -56,8 +56,7 @@
                     android:layout_marginEnd="3dp"
                     android:layout_marginTop="@dimen/fourth_margin"
                     android:scaleX="0.9"
-                    android:scaleY="0.9"
-                    android:drawableTop="@drawable/ic_right_hand_black" />
+                    android:scaleY="0.9" />
                 <TextView
                     android:id="@+id/glovesView"
                     android:layout_width="wrap_content"
@@ -69,9 +68,7 @@
                     android:scaleY="0.8"
                     android:textSize="14sp"
                     android:gravity="center|bottom"
-                    android:text=""
-                    android:textAlignment="gravity"
-                    android:drawableTop="@drawable/ic_gloves_off_black" />
+                    android:textAlignment="gravity" />
                 <TextView
                     android:id="@+id/movesView"
                     android:layout_width="wrap_content"
@@ -80,8 +77,7 @@
                     android:layout_marginEnd="6dp"
                     android:layout_marginTop="@dimen/fourth_margin"
                     android:scaleX="0.9"
-                    android:scaleY="0.9"
-                    android:drawableTop="@drawable/ic_punch_with_space_black" />
+                    android:scaleY="0.9" />
             </LinearLayout>
 
             <ImageButton

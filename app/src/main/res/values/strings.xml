@@ -1,5 +1,18 @@
 <resources>
-    <string name="pref_previously_started">true</string>
+    <string name="pref_previously_started">previouslyStarted</string>
+    <string name="pref_main_settings">com.stylesoft.fastestpunch.PREF_MAIN_SETTINGS</string>
+    <string name="pref_main_setting_search">com.stylesoft.fastestpunch.PREF_MAIN_SETTINGS_SEARCH</string>
+    <string name="hand_item">hand</string>
+    <string name="hand_left_check_item">handLeftCheck</string>
+    <string name="hand_right_check_item">handRightCheck</string>
+    <string name="gloves_item">gloves</string>
+    <string name="gloves_on_check_item">glovesOnCheck</string>
+    <string name="gloves_off_check_item">glovesOffCheck</string>
+    <string name="moves_item">moves</string>
+    <string name="on_step_check_item">onStepCheck</string>
+    <string name="with_space_check_item">withSpaceCheck</string>
+    <string name="gloves_weight_item">glovesWeight</string>
+    <string name="punch_type_item">punchType</string>
 
     <string name="overflow">Overflow</string>
     <string name="averageValue">Average value</string>
@@ -18,7 +31,7 @@
     <string name="settings_description">Settings</string>
     <string name="copyright">Copyright</string>
 
-    <!--Main settings activity-->
+    <!--Main settings-->
     <string name="left_hand_item">left</string>
     <string name="right_hand_item">right</string>
     <string name="gloves_on_item">gloves</string>

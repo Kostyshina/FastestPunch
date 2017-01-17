@@ -1,60 +1,40 @@
 package by.stylesoft.fastestpunch;
 
-import android.app.Dialog;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
+
 import android.support.design.widget.BottomSheetBehavior;
-import android.support.v4.graphics.drawable.DrawableCompat;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v4.content.ContextCompat;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.TextWatcher;
-import android.text.style.ImageSpan;
-import android.view.Gravity;
-import android.view.LayoutInflater;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.EditText;
-import android.widget.GridView;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
-import android.widget.Spinner;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import net.simonvt.menudrawer.MenuDrawer;
-import net.simonvt.menudrawer.Position;
 
 public class MainActivity extends AppCompatActivity {
+    private String hand;
+    private String gloves;
+    private String moves;
+    private String glovesWeight;
+    private String punchType;
 
     //private ListView mDrawerMenu;
-    private View contentViewParam;
-    private Dialog mBottomSheetDialog;
+    //private View contentViewParam;
+    //private Dialog mBottomSheetDialog;
+    private MainSettings ms;
 
     private ImageButton mainSettingsButton;
     private BottomSheetBehavior bottomSheetBehavior;
@@ -69,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.copyright_menu, menu);
         return true;
     }
+
     public void onComposeAction(MenuItem mi) {
         // handle click here
         startActivity(LicenseActivity.class);
@@ -79,8 +60,40 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);//содержимое Activity из layout-файла
-        contentViewParam = getLayoutInflater().inflate(R.layout.activity_main_settings, null);
-        initBottomSheet();
+        SharedPreferences prefs = getSharedPreferences(getString(R.string.pref_main_settings), Context.MODE_PRIVATE);
+        //prefs.edit().clear().apply();
+        hand = prefs.getString(getString(R.string.hand_item), "ic_right_hand_black");
+        boolean handLeft = prefs.getBoolean(getString(R.string.hand_left_check_item), false);
+        boolean handRight = prefs.getBoolean(getString(R.string.hand_right_check_item), true);
+        gloves = prefs.getString(getString(R.string.gloves_item), "ic_gloves_off_black");
+        boolean glovesOn = prefs.getBoolean(getString(R.string.gloves_on_check_item), false);
+        boolean glovesOff = prefs.getBoolean(getString(R.string.gloves_off_check_item), true);
+        moves = prefs.getString(getString(R.string.moves_item), "ic_punch_with_space_black");
+        boolean onStep = prefs.getBoolean(getString(R.string.on_step_check_item), false);
+        boolean withSpace = prefs.getBoolean(getString(R.string.with_space_check_item), true);
+        glovesWeight = prefs.getString(getString(R.string.gloves_weight_item), "");
+        punchType = prefs.getString(getString(R.string.punch_type_item), getResources().getStringArray(R.array.punch_type_array)[0]);
+        SharedPreferences.Editor edit = prefs.edit();
+        edit.putString(getString(R.string.hand_item), hand);
+        edit.putBoolean(getString(R.string.hand_left_check_item), handLeft);
+        edit.putBoolean(getString(R.string.hand_right_check_item), handRight);
+        edit.putString(getString(R.string.gloves_item), gloves);
+        edit.putBoolean(getString(R.string.gloves_on_check_item), glovesOn);
+        edit.putBoolean(getString(R.string.gloves_off_check_item), glovesOff);
+        edit.putString(getString(R.string.moves_item), moves);
+        edit.putBoolean(getString(R.string.on_step_check_item), onStep);
+        edit.putBoolean(getString(R.string.with_space_check_item), withSpace);
+        edit.putString(getString(R.string.gloves_weight_item), glovesWeight);
+        edit.putString(getString(R.string.punch_type_item), punchType);
+        edit.apply();
+
+        init();
+
+        View contentView = getLayoutInflater().inflate(R.layout.activity_main_settings, null);
+
+        ms = new MainSettings(this, contentView, getString(R.string.pref_main_settings));
+
+        //initBottomSheet();
 
         /*ActionBar actionBar = getSupportActionBar();
         LayoutInflater layoutInflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -102,7 +115,11 @@ public class MainActivity extends AppCompatActivity {
         mainSettingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                bottomSheetBehavior();
+                onPause();
+                ms.initBottomSheet();
+                ms.bottomSheetBehavior();
+                ms.show();
+                //bottomSheetBehavior();
                 //mBottomSheetDialog.show();
                 //bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
                 //mDrawer.openMenu();
@@ -154,6 +171,20 @@ public class MainActivity extends AppCompatActivity {
 */
     }
 
+    private void init(){
+        ((TextView) findViewById(R.id.punchTypeView)).setText(punchType);
+        ((TextView) findViewById(R.id.handView)).setCompoundDrawablesWithIntrinsicBounds(null,
+                ContextCompat.getDrawable(MainActivity.this,
+                        getResources().getIdentifier(hand, "drawable", getPackageName())), null, null);
+        ((TextView) findViewById(R.id.glovesView)).setCompoundDrawablesWithIntrinsicBounds(null,
+                ContextCompat.getDrawable(MainActivity.this,
+                        getResources().getIdentifier(gloves, "drawable", getPackageName())), null, null);
+        ((TextView) findViewById(R.id.glovesView)).setText(glovesWeight);
+        ((TextView) findViewById(R.id.movesView)).setCompoundDrawablesWithIntrinsicBounds(null,
+                ContextCompat.getDrawable(MainActivity.this,
+                        getResources().getIdentifier(moves, "drawable", getPackageName())), null, null);
+    }
+
     /** Called when the activity is about to become visible. */
     @Override
     protected void onStart() {
@@ -161,6 +192,9 @@ public class MainActivity extends AppCompatActivity {
         boolean previouslyStarted = prefs.getBoolean(getString(R.string.pref_previously_started), false);
         if(!previouslyStarted) {
             startActivity(LicenseActivity.class);
+            SharedPreferences.Editor edit = prefs.edit();
+            edit.putBoolean(getString(R.string.pref_previously_started), Boolean.TRUE);
+            edit.apply();
         }
         super.onStart();
     }
@@ -168,6 +202,7 @@ public class MainActivity extends AppCompatActivity {
     /** Called when the activity has become visible. */
     @Override
     protected void onResume() {
+        init();
         super.onResume();
     }
 
@@ -176,170 +211,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void initBottomSheet(){
-        ImageButton mTopButton = (ImageButton) contentViewParam.findViewById(R.id.menuTopButton);
-        mBottomSheetDialog = new Dialog(MainActivity.this, R.style.MainSettingsTheme);
-        mBottomSheetDialog.setContentView(contentViewParam);
-        mBottomSheetDialog.setCancelable(true);
-        mBottomSheetDialog.getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        mBottomSheetDialog.getWindow().setGravity(Gravity.TOP);
-
-        mTopButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mBottomSheetDialog.dismiss();
-                //bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-            }
-        });
-
-        Button[] buttons = new Button[3];
-        buttons[0] = (Button) contentViewParam.findViewById(R.id.leftHandButton);
-        buttons[1] = (Button) contentViewParam.findViewById(R.id.glovesOnButton);
-        buttons[2] = (Button) contentViewParam.findViewById(R.id.punchOnStepButton);
-
-        for(int j = 0; j < 3; j++) {
-            Drawable drawable = buttons[j].getCompoundDrawables()[1];
-            int color = getResources().getColor(R.color.colorGreyDark);
-            drawable.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
-            drawable = DrawableCompat.wrap(drawable);
-            buttons[j].setCompoundDrawables(null, drawable, null, null);
-        }
-    }
-
-    public void bottomSheetBehavior(){
-        View contentView = contentViewParam;
-        //ImageButton mTopButton = (ImageButton) contentView.findViewById(R.id.menuTopButton);
-        final Spinner spinner = (Spinner) contentView.findViewById(R.id.punchTypeSpinner);
-        //Button[] buttons = new Button[3];
-
-        mBottomSheetDialog.show();
-        //contentViewParam = contentView;
-
-        /*ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.punch_type_array,
-                android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);*/
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                TextView textView = (TextView) findViewById(R.id.punchTypeView);
-                textView.setText(parent.getItemAtPosition(position).toString());
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        EditText editText = (EditText) contentViewParam.findViewById(R.id.glovesWeight);
-        editText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (contentViewParam.findViewById(R.id.glovesWeightForm).getVisibility() == View.VISIBLE) {
-                    TextView textView = (TextView) findViewById(R.id.glovesView);
-                    textView.setText(s);
-                }
-            }
-        });
-
-
-        final TableLayout imageTable = (TableLayout) contentView.findViewById(R.id.imageTable);
-        int countRow = imageTable.getChildCount();
-        for (int i = 0; i < countRow; i++) {
-            View v = imageTable.getChildAt(i);
-            if (v instanceof RadioGroup) {
-                RadioGroup group = (RadioGroup) v;
-                group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(RadioGroup group, int checkedId) {
-                        int index = imageTable.indexOfChild(group);
-                        for (int j = 0; j < group.getChildCount(); j++) {
-                            final ToggleButton toggleButton = (ToggleButton) group.getChildAt(j);
-                            toggleButton.setChecked(toggleButton.getId() == checkedId);
-                            Drawable drawable = toggleButton.getCompoundDrawables()[1];
-                            int color = getResources().getColor(R.color.colorGreyDark);
-                            if(toggleButton.getId() != checkedId){
-                                drawable.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
-                            } else {
-                                drawable.clearColorFilter();
-                                TextView textView = new TextView(getApplicationContext());
-                                switch (index) {
-                                    case 0:
-                                        textView = (TextView) findViewById(R.id.handView);
-                                        break;
-                                    case 1:
-                                        textView = (TextView) findViewById(R.id.glovesView);
-                                        break;
-                                    case 2:
-                                        textView = (TextView) findViewById(R.id.movesView);
-                                        break;
-                                    default:
-                                        Toast.makeText(getApplicationContext(), "No view found for " + index,
-                                                Toast.LENGTH_SHORT).show();
-                                }
-                                textView.setCompoundDrawables(null, toggleButton.getCompoundDrawables()[1], null, null);
-                            }
-                            /*ImageSpan imageSpan = new ImageSpan(drawable);
-                            SpannableString content = new SpannableString(toggleButton.getText());
-                            content.setSpan(imageSpan,0,1, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
-                            toggleButton.setCompoundDrawables(null,null,null,null);
-                            toggleButton.setText(content);
-                            toggleButton.setTextOff(content);
-                            toggleButton.setTextOn(content);*/
-                            toggleButton.setCompoundDrawables(null, drawable, null, null);
-                        }
-                    }
-                });
-                /*int countCell = row.getChildCount();
-                for (j = 0; j < countCell; j++) {
-                    View v2 = row.getChildAt(j);
-                    if (v2 instanceof ToggleButton) {
-                        ToggleButton b = (ToggleButton) v2;
-                        b.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
-                            @Override
-                            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                                *//*if(getResources().getDrawable(R.drawable.main_settings_item_inactive).getConstantState().equals(
-                                        v.getBackground().getConstantState())) {
-                                    v.setSelected(true);
-                                }else {
-                                    v.setSelected(false);
-                                }*//*
-                                *//*int states[] = b.getDrawableState();
-                                for(int state : states) {
-
-                                    if (state == android.R.attr.state_selected){
-
-                                    }
-                                }*//*
-                            }
-                        });
-                    }
-                 }*/
-            }
-        }
-    }
-
     public void onToggle(View view) {
-        ((RadioGroup)view.getParent()).check(0);
-        ((RadioGroup)view.getParent()).check(view.getId());
-        LinearLayout linearLayoutGloves = (LinearLayout) contentViewParam.findViewById(R.id.glovesWeightForm);
-        if(view.getId() == R.id.glovesOnButton){
-            linearLayoutGloves.setVisibility(View.VISIBLE);
-        } else if(view.getId() == R.id.glovesOffButton){
-            ((EditText) contentViewParam.findViewById(R.id.glovesWeight)).setText("");
-            linearLayoutGloves.setVisibility(View.GONE);
-        }
+        ms.onToggle(view);
     }
 
 
