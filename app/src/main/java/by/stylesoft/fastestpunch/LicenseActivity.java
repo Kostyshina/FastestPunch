@@ -28,9 +28,7 @@ import android.widget.Toast;
 public class LicenseActivity extends AppCompatActivity {
 
     View lineView;
-    DrawLineView drawView;
     Button buttonAccept;
-    static final String STORAGE_NAME = "PersistentStorage";
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -64,8 +62,8 @@ public class LicenseActivity extends AppCompatActivity {
         View parallelLine = findViewById(R.id.imageViewLine);
         parallelLine.setBackground(parallel);
         buttonAccept = (Button)findViewById(R.id.buttonAccept);
-        prefs = getApplicationContext().getSharedPreferences(STORAGE_NAME,MODE_PRIVATE);
-        final boolean acceptButtonPushed = prefs.getBoolean("accept_button_pushed",false);
+        prefs = getApplicationContext().getSharedPreferences(getString(R.string.pref_persistent_storage),MODE_PRIVATE);
+        final boolean acceptButtonPushed = prefs.getBoolean(getString(R.string.accept_button_pushed),false);
         if(acceptButtonPushed){
             buttonAccept.setVisibility(View.INVISIBLE);
         }
@@ -77,17 +75,12 @@ public class LicenseActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-        //drawView = new DrawLineView(this);
-
-        //lineView = findViewById(R.id.lineView);
-        //lineView.draw();
     }
 
     public void changePreference(){
-        SharedPreferences prefs = getApplicationContext().getSharedPreferences(STORAGE_NAME,MODE_PRIVATE);
+        SharedPreferences prefs = getApplicationContext().getSharedPreferences(getString(R.string.pref_persistent_storage),MODE_PRIVATE);
         SharedPreferences.Editor edit = prefs.edit();
-        edit.putBoolean("accept_button_pushed", true);
+        edit.putBoolean(getString(R.string.accept_button_pushed), true);
         edit.apply();
     }
 

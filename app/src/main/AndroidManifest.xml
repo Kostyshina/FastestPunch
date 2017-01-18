@@ -3,6 +3,7 @@
     package="by.stylesoft.fastestpunch">
 
     <application
+        android:name=".FastestPunch"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -10,8 +11,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:theme="@style/MainTheme"
-            android:windowSoftInputMode="stateHidden|adjustPan">
+            android:theme="@style/MainTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,15 +20,19 @@
         </activity>
         <activity
             android:name=".MainSettingsActivity"
-            android:theme="@style/MainSettingsTheme"/>
+            android:theme="@style/MainSettingsTheme" />
         <activity
             android:name=".LicenseActivity"
-            android:theme="@style/LicenseTheme"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/NoTitleActionBarTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                android:value=".MainActivity" />
         </activity>
+        <activity
+            android:name=".PunchButtonActivity"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/NoTitleActionBarTheme"/>
     </application>
 
 </manifest>

@@ -30,7 +30,7 @@
         <item name="android:textSize">@dimen/main_settings_text_size</item>
     </style>
 
-    <style name="LicenseTheme" parent="AppTheme">
+    <style name="NoTitleActionBarTheme" parent="AppTheme">
         <item name="actionBarStyle">@style/NoTitleActionBarStyle</item>
         <!--<item name="windowNoTitle">true</item>
         <item name="windowActionBar">true</item>-->

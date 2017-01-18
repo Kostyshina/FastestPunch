@@ -22,4 +22,5 @@
     <dimen name="punch_button_text_size">40sp</dimen>
     <dimen name="button_text_size">14sp</dimen>
     <dimen name="main_settings_text_size">16sp</dimen>
+    <dimen name="result_text_size">24sp</dimen>
 </resources>

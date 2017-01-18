@@ -19,7 +19,7 @@
                 android:id="@+id/reactionSpeedItem"
                 android:icon="@drawable/ic_arrow_down_black"
                 app:showAsAction="ifRoom"
-                android:title="@string/reactionSpeed"/>
+                android:title="@string/reaction_speed"/>
             <item
                 android:id="@+id/accelerationItem"
                 android:icon="@drawable/ic_arrow_down_black"

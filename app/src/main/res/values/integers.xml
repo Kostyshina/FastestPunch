@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Seek Bar maximums multiply by 100-->
+    <integer name="punch_speed_max">600</integer>
+    <integer name="reaction_speed_max">100</integer>
+    <integer name="acceleration_max">2100</integer>
+</resources>

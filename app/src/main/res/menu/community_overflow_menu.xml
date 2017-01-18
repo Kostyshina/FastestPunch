@@ -13,15 +13,15 @@
             <item
                 android:id="@+id/averageValueItem"
                 app:showAsAction="always"
-                android:title="@string/averageValue"/>
+                android:title="@string/average_value"/>
             <item
                 android:id="@+id/changeNameItem"
                 app:showAsAction="ifRoom"
-                android:title="@string/changeName"/>
+                android:title="@string/change_name"/>
             <item
                 android:id="@+id/leaveCommunityItem"
                 app:showAsAction="ifRoom"
-                android:title="@string/leaveCommunity"/>
+                android:title="@string/leave_community"/>
         </menu>
     </item>
 </menu>

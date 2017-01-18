@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_punch_button"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="by.stylesoft.fastestpunch.PunchButtonActivity">
+
+    <LinearLayout
+        android:id="@+id/settingsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/punchTypeView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/fourth_margin"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:background="@drawable/parameters_background" />
+        <LinearLayout
+            android:id="@+id/parametersLayout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="4dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:background="@drawable/parameters_background"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/handView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="3dp"
+                android:layout_marginTop="@dimen/fourth_margin"
+                android:scaleX="0.9"
+                android:scaleY="0.9" />
+            <TextView
+                android:id="@+id/glovesView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
+                android:layout_marginTop="@dimen/fourth_margin"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
+                android:textSize="14sp"
+                android:gravity="center|bottom"
+                android:textAlignment="gravity" />
+            <TextView
+                android:id="@+id/movesView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="6dp"
+                android:layout_marginTop="@dimen/fourth_margin"
+                android:scaleX="0.9"
+                android:scaleY="0.9" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/normal_margin"
+        android:layout_marginStart="@dimen/normal_margin"
+        android:layout_below="@id/settingsLayout"
+        android:orientation="vertical">
+        <include android:id="@+id/punchSpeedLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/double_margin"
+            android:layout_marginBottom="@dimen/normal_margin"
+            layout="@layout/result_item_layout"/>
+        <include android:id="@+id/reactionSpeedLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/normal_margin"
+            android:layout_marginBottom="@dimen/normal_margin"
+            layout="@layout/result_item_layout"/>
+        <include android:id="@+id/accelerationLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/normal_margin"
+            android:layout_marginBottom="@dimen/double_margin"
+            layout="@layout/result_item_layout"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/okButton"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="@dimen/button_height"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/button_background_red"
+        android:text="@string/ok_button_text"
+        android:textColor="@color/colorTextWhite"
+        android:typeface="normal" />
+
+</RelativeLayout>

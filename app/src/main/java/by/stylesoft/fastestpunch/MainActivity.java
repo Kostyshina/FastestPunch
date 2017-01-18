@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     //private View contentViewParam;
     //private Dialog mBottomSheetDialog;
     private MainSettings ms;
-
+    private Button punchButton;
     private ImageButton mainSettingsButton;
     private BottomSheetBehavior bottomSheetBehavior;
     //private DrawerLayout mDrawerLayout;
@@ -115,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
         mainSettingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onPause();
                 ms.initBottomSheet();
                 ms.bottomSheetBehavior();
                 ms.show();
@@ -126,6 +126,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        punchButton = (Button) findViewById(R.id.punchButton);
+        punchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //call sensor and record results
+                float punchSpeed = (float) Math.random()*getResources().getInteger(R.integer.punch_speed_max)/100;
+                float reactionSpeed = (float) Math.random()*getResources().getInteger(R.integer.reaction_speed_max)/100;
+                float acceleration = (float) Math.random()*getResources().getInteger(R.integer.acceleration_max)/100;
+                SharedPreferences prefs = getSharedPreferences(getString(R.string.pref_persistent_storage), Context.MODE_PRIVATE);
+                SharedPreferences.Editor edit = prefs.edit();
+                edit.putFloat(getString(R.string.punch_speed_result), punchSpeed);
+                edit.putFloat(getString(R.string.reaction_speed_result), reactionSpeed);
+                edit.putFloat(getString(R.string.acceleration_result), acceleration);
+                edit.apply();
+                startActivity(PunchButtonActivity.class);
+            }
+        });
         //final MainSettingsActivity mSettingsActivity = new MainSettingsActivity();
         /*mDrawer = MenuDrawer.attach(this, MenuDrawer.Type.OVERLAY, Position.TOP);
         mDrawer.setContentView(R.layout.activity_main);

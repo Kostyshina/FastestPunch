@@ -1,5 +1,12 @@
-<resources>
+<resources xmlns:xliff="http://schemas.android.com/tools">
+    <!--Shared Preferences-->
     <string name="pref_previously_started">previouslyStarted</string>
+    <string name="pref_persistent_storage">com.stylesoft.fastestpunch.PERSISTENT_STORAGE</string>
+    <string name="accept_button_pushed">accept_button_pushed</string>
+    <string name="punch_speed_result">punch_speed_result</string>
+    <string name="reaction_speed_result">reaction_speed_result</string>
+    <string name="acceleration_result">acceleration_result</string>
+
     <string name="pref_main_settings">com.stylesoft.fastestpunch.PREF_MAIN_SETTINGS</string>
     <string name="pref_main_setting_search">com.stylesoft.fastestpunch.PREF_MAIN_SETTINGS_SEARCH</string>
     <string name="hand_item">hand</string>
@@ -14,15 +21,17 @@
     <string name="gloves_weight_item">glovesWeight</string>
     <string name="punch_type_item">punchType</string>
 
+    <!--Overflow menus-->
     <string name="overflow">Overflow</string>
-    <string name="averageValue">Average value</string>
-    <string name="changeName">Change name</string>
-    <string name="leaveCommunity">Leave community</string>
+    <string name="average_value">Average value</string>
+    <string name="change_name">Change name</string>
+    <string name="leave_community">Leave community</string>
 
-    <string name="punchSpeed">Punch speed</string>
-    <string name="reactionSpeed">Reaction speed</string>
+    <string name="punch_speed">Punch speed</string>
+    <string name="reaction_speed">Reaction speed</string>
     <string name="acceleration">Accelerator</string>
     <string name="date">Date</string>
+
     <!--Main activity-->
     <string name="app_name">Fastest Punch</string>
     <string name="punch_button">Punch</string>
@@ -58,6 +67,18 @@
     <string name="eula_line_description">Line</string>
     <string name="accept_button_text">Accept</string>
     <!--<string name="accept_button_pushed">false</string>-->
+
+    <!--Punch Button activity-->
+    <string name="ok_button_text">OK</string>
+    <string name="bad_seek_bar_text">bad</string>
+    <string name="middle_seek_bar_text">middle</string>
+    <string name="good_seek_bar_text">good</string>
+    <string name="punch_speed_text">@string/punch_speed</string>
+    <string name="punch_speed_dimen_text"><xliff:g>%.2f</xliff:g> m/s</string>
+    <string name="reaction_speed_text">@string/reaction_speed</string>
+    <string name="reaction_speed_dimen_text"><xliff:g>%.2f</xliff:g> s</string>
+    <string name="acceleration_text">@string/acceleration</string>
+    <string name="acceleration_dimen_text"><xliff:g>%.2f</xliff:g> m/s^2</string>
 
     <!--History-->
     <string name="history_label">History</string>
