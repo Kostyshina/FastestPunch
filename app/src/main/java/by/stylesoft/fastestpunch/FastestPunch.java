@@ -7,9 +7,12 @@ import android.os.Bundle;
 
 /**
  * Created by User on 18.01.2017.
+ * Class of all application
+ * (used to disable landscape orientation for all activities)
  */
 
 public class FastestPunch extends Application {
+
 
     @Override
     public void onCreate() {

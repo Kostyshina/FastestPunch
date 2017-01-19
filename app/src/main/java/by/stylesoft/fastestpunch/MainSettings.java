@@ -47,7 +47,7 @@ public class MainSettings {
     private String moves;
     private boolean [] checked;
     private String glovesWeight;
-    private String punchType;
+    private int punchType;
 
     MainSettings(final Context context, View view, String file){
         this.context = context;
@@ -82,7 +82,7 @@ public class MainSettings {
         edit.putBoolean(context.getString(R.string.on_step_check_item), checked[4]);
         edit.putBoolean(context.getString(R.string.with_space_check_item), checked[5]);
         edit.putString(context.getString(R.string.gloves_weight_item), glovesWeight);
-        edit.putString(context.getString(R.string.punch_type_item), punchType);
+        edit.putInt(context.getString(R.string.punch_type_item), punchType);
         edit.apply();
     }
 
@@ -98,7 +98,7 @@ public class MainSettings {
         checked[4] = prefs.getBoolean(context.getString(R.string.on_step_check_item), false);
         checked[5] = prefs.getBoolean(context.getString(R.string.with_space_check_item), true);
         glovesWeight = prefs.getString(context.getString(R.string.gloves_weight_item), "");
-        punchType = prefs.getString(context.getString(R.string.punch_type_item), "");
+        punchType = prefs.getInt(context.getString(R.string.punch_type_item), 0);
 
 
         ToggleButton[] buttons = new ToggleButton[6];
@@ -164,11 +164,11 @@ public class MainSettings {
             }
         });
         Spinner spinner = (Spinner) contentView.findViewById(R.id.punchTypeSpinner);
-        spinner.setSelection(getIndex(spinner, punchType));
+        spinner.setSelection(punchType);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                punchType = parent.getItemAtPosition(position).toString();
+                punchType = position;
             }
 
             @Override

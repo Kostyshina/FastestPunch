@@ -1,14 +1,14 @@
 <resources xmlns:xliff="http://schemas.android.com/tools">
     <!--Shared Preferences-->
     <string name="pref_previously_started">previouslyStarted</string>
-    <string name="pref_persistent_storage">com.stylesoft.fastestpunch.PERSISTENT_STORAGE</string>
+    <string name="pref_persistent_storage">by.stylesoft.fastestpunch.PERSISTENT_STORAGE</string>
     <string name="accept_button_pushed">accept_button_pushed</string>
     <string name="punch_speed_result">punch_speed_result</string>
     <string name="reaction_speed_result">reaction_speed_result</string>
     <string name="acceleration_result">acceleration_result</string>
 
-    <string name="pref_main_settings">com.stylesoft.fastestpunch.PREF_MAIN_SETTINGS</string>
-    <string name="pref_main_setting_search">com.stylesoft.fastestpunch.PREF_MAIN_SETTINGS_SEARCH</string>
+    <string name="pref_main_settings">by.stylesoft.fastestpunch.PREF_MAIN_SETTINGS</string>
+    <string name="pref_main_setting_search">by.stylesoft.fastestpunch.PREF_MAIN_SETTINGS_SEARCH</string>
     <string name="hand_item">hand</string>
     <string name="hand_left_check_item">handLeftCheck</string>
     <string name="hand_right_check_item">handRightCheck</string>
@@ -78,10 +78,11 @@
     <string name="reaction_speed_text">@string/reaction_speed</string>
     <string name="reaction_speed_dimen_text"><xliff:g>%.2f</xliff:g> s</string>
     <string name="acceleration_text">@string/acceleration</string>
-    <string name="acceleration_dimen_text"><xliff:g>%.2f</xliff:g> m/s^2</string>
+    <string name="acceleration_dimen_text"><xliff:g>%.2f</xliff:g>
+        m/s&lt;sup&gt;&lt;small&gt;&lt;small&gt;2&lt;/small&gt;&lt;/small&gt;&lt;/sup&gt;</string>
 
     <!--History-->
-    <string name="history_label">History</string>
+    <string name="history_label">@string/history</string>
 
     <!--Community-->
     <string name="community_label">Community</string>

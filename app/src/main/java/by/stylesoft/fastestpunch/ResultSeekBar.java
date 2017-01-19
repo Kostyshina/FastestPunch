@@ -62,7 +62,7 @@ public class ResultSeekBar extends SeekBar {
                 }
                 //thumbOffset / 2
                 progressRect.set(lastProgressX, 0,
-                        progressItemRight, progressBarHeight - thumbOffset / 2);
+                        progressItemRight, progressBarHeight / 2 - thumbOffset / 6);
                 canvas.drawRect(progressRect, progressPaint);
                 lastProgressX = progressItemRight;
             }

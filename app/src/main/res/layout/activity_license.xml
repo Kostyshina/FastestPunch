@@ -24,7 +24,7 @@
     <View
         android:id="@+id/imageViewLine"
         android:layout_width="match_parent"
-        android:layout_height="18dp"
+        android:layout_height="20dp"
         android:layout_marginTop="@dimen/normal_margin"
         android:layout_marginBottom="10dp"
         android:contentDescription="@string/eula_line_description" />

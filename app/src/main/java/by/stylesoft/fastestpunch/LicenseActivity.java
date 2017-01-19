@@ -1,34 +1,27 @@
 package by.stylesoft.fastestpunch;
 
-import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.PathDashPathEffect;
+import android.graphics.Point;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NavUtils;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 public class LicenseActivity extends AppCompatActivity {
 
-    View lineView;
-    Button buttonAccept;
+    private Button buttonAccept;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -49,18 +42,25 @@ public class LicenseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_license);
+
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         boolean previouslyStarted = prefs.getBoolean(getString(R.string.pref_previously_started), false);
-        if(!previouslyStarted) {
+        if(!previouslyStarted && getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowHomeEnabled(false);
             getSupportActionBar().setHomeButtonEnabled(false);
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         }
         //Drawable drawable = getResources().getDrawable(R.drawable.button_background);
-        BitmapDrawable parallel = drawParallelogramLine();
 
-        View parallelLine = findViewById(R.id.imageViewLine);
-        parallelLine.setBackground(parallel);
+        final View parallelLine = findViewById(R.id.imageViewLine);
+        parallelLine.post(new Runnable() {
+            @Override
+            public void run() {
+                BitmapDrawable parallel = drawParallelogramLine(parallelLine.getWidth());
+                parallelLine.setBackground(parallel);
+            }
+        });
+
         buttonAccept = (Button)findViewById(R.id.buttonAccept);
         prefs = getApplicationContext().getSharedPreferences(getString(R.string.pref_persistent_storage),MODE_PRIVATE);
         final boolean acceptButtonPushed = prefs.getBoolean(getString(R.string.accept_button_pushed),false);
@@ -71,7 +71,6 @@ public class LicenseActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 changePreference();
-                //Toast.makeText(LicenseActivity.this, "accept_button_pushed value =" + acceptButtonPushed, Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
@@ -84,34 +83,35 @@ public class LicenseActivity extends AppCompatActivity {
         edit.apply();
     }
 
-    public BitmapDrawable drawParallelogramLine(){
+    public BitmapDrawable drawParallelogramLine(int width){
         Matrix matrix = new Matrix();
         Path path = new Path();
-        path.addRect(0, 0, 90, 18, Path.Direction.CW);
+        //width / 3 -  ; 0.2;
+        //path.addRect(0, 0, (3 * width) / 22, (3 * width) / 110, Path.Direction.CW);
+        path.addRect(0, 0, (4 * width) / 40, (4 * width) / 200, Path.Direction.CW);
         Path pathStamp = new Path();
         Paint p;
-        Paint line;
-        Bitmap bitmap = null;
+        Bitmap bitmap;
 
         p = new Paint(Paint.ANTI_ALIAS_FLAG);
         p.setStyle(Paint.Style.FILL);
 
-        bitmap = Bitmap.createBitmap(90*2+20+20, 10+18+10, Bitmap.Config.ARGB_8888);
+        bitmap = Bitmap.createBitmap(width / 4, width / 80 * 2 + (4 * width) / 200, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
 
-        p.setColor(getResources().getColor(R.color.colorPrimaryLight));
+        p.setColor(ContextCompat.getColor(this, R.color.colorPrimaryLight));
 
         matrix.reset();
         matrix.setTranslate(0,0);
-        matrix.postSkew(-1f, 0.0f, 0, 18);
+        matrix.postSkew(-1f, 0.0f, 0, (4 * width) / 200);
         path.transform(matrix, pathStamp);
         canvas.drawPath(pathStamp, p);
 
-        p.setColor(getResources().getColor(R.color.colorAccent));
+        p.setColor(ContextCompat.getColor(this, R.color.colorAccent));
 
         matrix.reset();
-        matrix.setTranslate(90+20,0);
-        matrix.postSkew(-1f, 0.0f, 90+20, 18);
+        matrix.setTranslate(width / 8, 0);
+        matrix.postSkew(-1f, 0.0f, width / 8, (4 * width) / 200);
         path.transform(matrix, pathStamp);
         canvas.drawPath(pathStamp, p);
 

@@ -11,8 +11,13 @@
     <color name="colorGreyLight">#EDEDED</color>
     <color name="colorGrey">#E3E3E3</color>
     <color name="colorGreyDark">#ABABAB</color>
+    <color name="colorGreyDarkest">#696969	</color>
     <color name="colorTextWhite">#FFFFFF</color>
     <color name="colorTextBlack">#000000</color>
+
+    <color name="colorSeekBarRed">#8C1717</color>
+    <color name="colorSeekBarYellow">@color/colorPrimaryLight</color>
+    <color name="colorSeekBarGreen">#B0F66F</color>
 
     <color name="md__defaultBackground">@color/colorDefaultBackground</color>
 

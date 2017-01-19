@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.preference.PreferenceManager;
@@ -25,12 +27,15 @@ import android.widget.TextView;
 
 import net.simonvt.menudrawer.MenuDrawer;
 
+import by.stylesoft.fastestpunch.data.FastestPunchContract.*;
+import by.stylesoft.fastestpunch.data.FastestPunchDbHelper;
+
 public class MainActivity extends AppCompatActivity {
     private String hand;
     private String gloves;
     private String moves;
     private String glovesWeight;
-    private String punchType;
+    private int punchType;
 
     //private ListView mDrawerMenu;
     //private View contentViewParam;
@@ -38,11 +43,15 @@ public class MainActivity extends AppCompatActivity {
     private MainSettings ms;
     private Button punchButton;
     private ImageButton mainSettingsButton;
+    private Button historyButton;
+    private Button communityButton;
     private BottomSheetBehavior bottomSheetBehavior;
     //private DrawerLayout mDrawerLayout;
     private MenuDrawer mDrawer;
     private ArrayAdapter mAdapter;
     private CharSequence mTitle;
+
+    private FastestPunchDbHelper mDbHelper;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -62,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);//содержимое Activity из layout-файла
         SharedPreferences prefs = getSharedPreferences(getString(R.string.pref_main_settings), Context.MODE_PRIVATE);
-        //prefs.edit().clear().apply();
         hand = prefs.getString(getString(R.string.hand_item), "ic_right_hand_black");
         boolean handLeft = prefs.getBoolean(getString(R.string.hand_left_check_item), false);
         boolean handRight = prefs.getBoolean(getString(R.string.hand_right_check_item), true);
@@ -73,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         boolean onStep = prefs.getBoolean(getString(R.string.on_step_check_item), false);
         boolean withSpace = prefs.getBoolean(getString(R.string.with_space_check_item), true);
         glovesWeight = prefs.getString(getString(R.string.gloves_weight_item), "");
-        punchType = prefs.getString(getString(R.string.punch_type_item), getResources().getStringArray(R.array.punch_type_array)[0]);
+        punchType = prefs.getInt(getString(R.string.punch_type_item), 0);
         SharedPreferences.Editor edit = prefs.edit();
         edit.putString(getString(R.string.hand_item), hand);
         edit.putBoolean(getString(R.string.hand_left_check_item), handLeft);
@@ -85,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         edit.putBoolean(getString(R.string.on_step_check_item), onStep);
         edit.putBoolean(getString(R.string.with_space_check_item), withSpace);
         edit.putString(getString(R.string.gloves_weight_item), glovesWeight);
-        edit.putString(getString(R.string.punch_type_item), punchType);
+        edit.putInt(getString(R.string.punch_type_item), punchType);
         edit.apply();
 
         init();
@@ -143,7 +151,16 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(PunchButtonActivity.class);
             }
         });
-        //final MainSettingsActivity mSettingsActivity = new MainSettingsActivity();
+
+        historyButton = (Button) findViewById(R.id.historyButton);
+        historyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(HistoryActivity.class);
+            }
+        });
+
+        mDbHelper = new FastestPunchDbHelper(this);
         /*mDrawer = MenuDrawer.attach(this, MenuDrawer.Type.OVERLAY, Position.TOP);
         mDrawer.setContentView(R.layout.activity_main);
 
@@ -189,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init(){
-        ((TextView) findViewById(R.id.punchTypeView)).setText(punchType);
+        ((TextView) findViewById(R.id.punchTypeView)).setText(getResources().getStringArray(R.array.punch_type_array)[punchType]);
         ((TextView) findViewById(R.id.handView)).setCompoundDrawablesWithIntrinsicBounds(null,
                 ContextCompat.getDrawable(MainActivity.this,
                         getResources().getIdentifier(hand, "drawable", getPackageName())), null, null);
@@ -214,6 +231,7 @@ public class MainActivity extends AppCompatActivity {
             edit.apply();
         }
         super.onStart();
+        //displayDatabaseInfo();
     }
 
     /** Called when the activity has become visible. */
@@ -232,11 +250,68 @@ public class MainActivity extends AppCompatActivity {
         ms.onToggle(view);
     }
 
+/*    private void displayDatabaseInfo() {
+        // Создадим и откроем для чтения базу данных
+        SQLiteDatabase db = mDbHelper.getReadableDatabase();
 
-    private Bitmap changeBitmapColor(int id){
-        Drawable sourceDrawable = getResources().getDrawable(id);
-        Bitmap sourceBitmap = DrawableBitmap.drawableToBitmap(sourceDrawable);
-        return DrawableBitmap.changeImageColor(sourceBitmap,
-                getResources().getColor(R.color.colorGreyDark));
-    }
+        // Зададим условие для выборки - список столбцов
+        String[] projection = {
+                HistoryEntry._ID,
+                HistoryEntry.COLUMN_PARAMETERS,
+                HistoryEntry.COLUMN_PUNCH_SPEED,
+                HistoryEntry.COLUMN_REACTION_SPEED,
+                HistoryEntry.COLUMN_ACCELERATION,
+                HistoryEntry.COLUMN_DATE
+        };
+
+        // Делаем запрос
+        Cursor cursor = db.query(
+                HistoryEntry.TABLE_NAME,   // таблица
+                projection,            // столбцы
+                null,                  // столбцы для условия WHERE
+                null,                  // значения для условия WHERE
+                null,                  // Don't group the rows
+                null,                  // Don't filter by row groups
+                null);                   // порядок сортировки
+
+        TextView displayTextView = (TextView) findViewById(R.id.tableInfoView);
+
+        try {
+            displayTextView.setText("Таблица содержит " + cursor.getCount() + " записей.\n\n");
+            displayTextView.append(HistoryEntry._ID + " - " +
+                    HistoryEntry.COLUMN_PARAMETERS + " - " +
+                    HistoryEntry.COLUMN_PUNCH_SPEED + " - " +
+                    HistoryEntry.COLUMN_REACTION_SPEED + " - " +
+                    HistoryEntry.COLUMN_ACCELERATION + " - " +
+                    HistoryEntry.COLUMN_DATE + "\n");
+
+            // Узнаем индекс каждого столбца
+            int idColumnIndex = cursor.getColumnIndex(HistoryEntry._ID);
+            int nameColumnIndex = cursor.getColumnIndex(HistoryEntry.COLUMN_PARAMETERS);
+            int cityColumnIndex = cursor.getColumnIndex(HistoryEntry.COLUMN_PUNCH_SPEED);
+            int genderColumnIndex = cursor.getColumnIndex(HistoryEntry.COLUMN_REACTION_SPEED);
+            int ageColumnIndex = cursor.getColumnIndex(HistoryEntry.COLUMN_ACCELERATION);
+            int lastColumnIndex = cursor.getColumnIndex(HistoryEntry.COLUMN_DATE);
+
+            // Проходим через все ряды
+            while (cursor.moveToNext()) {
+                // Используем индекс для получения строки или числа
+                int currentID = cursor.getInt(idColumnIndex);
+                String currentName = cursor.getString(nameColumnIndex);
+                String currentCity = cursor.getString(cityColumnIndex);
+                int currentGender = cursor.getInt(genderColumnIndex);
+                int currentAge = cursor.getInt(ageColumnIndex);
+                int currentLast = cursor.getInt(lastColumnIndex);
+                // Выводим значения каждого столбца
+                displayTextView.append(("\n" + currentID + " - " +
+                        currentName + " - " +
+                        currentCity + " - " +
+                        currentGender + " - " +
+                        currentAge));
+            }
+        } finally {
+            // Всегда закрываем курсор после чтения
+            cursor.close();
+        }
+    }*/
 }
